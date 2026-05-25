@@ -249,7 +249,7 @@
         // =========================================================================
         // GANTI LINK DI BAWAH INI DENGAN "URL APLIKASI WEB" DARI GOOGLE APPS SCRIPT
         // =========================================================================
-        const APPS_SCRIPT_URL = "ISI_DENGAN_URL_WEB_APP_ANDA_DISINI";
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz-Eht-CXRKZ371bHQOWHDZKk09aGpApzEsMKHry-C2eeT7hoiNI2Oqbok4L1QKZ235/exec";
 
         // --- DATABASE DEMO (Hanya aktif jika APPS_SCRIPT_URL belum diisi) ---
         const databaseDemo = [
@@ -489,7 +489,7 @@
             };
 
             // JALANKAN SIMULASI KIRIM JIKA LINK GOOGLE SCRIPT BELUM DIISI
-            if(APPS_SCRIPT_URL === "https://script.google.com/macros/s/AKfycbz-Eht-CXRKZ371bHQOWHDZKk09aGpApzEsMKHry-C2eeT7hoiNI2Oqbok4L1QKZ235/exec") {
+            if(APPS_SCRIPT_URL === "ISI_DENGAN_URL_WEB_APP_ANDA_DISINI") {
                 setTimeout(() => {
                     document.getElementById('confirmationOverlay').classList.add('hidden');
                     document.getElementById('successMessage').classList.remove('hidden');
