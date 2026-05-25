@@ -249,7 +249,7 @@
         // =========================================================================
         // GANTI LINK DI BAWAH INI DENGAN "URL APLIKASI WEB" DARI GOOGLE APPS SCRIPT
         // =========================================================================
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMcQb87E5uDl0CijZbkFqShVf6cxtHsWkkZo_ZBVxT_tLJZcu7IBWzznrsGyDXH4hA/exec";
+        const APPS_SCRIPT_URL = "ISI_DENGAN_URL_WEB_APP_ANDA_DISINI";
 
         // --- DATABASE DEMO (Hanya aktif jika APPS_SCRIPT_URL belum diisi) ---
         const databaseDemo = [
@@ -410,7 +410,9 @@
                     isDataFound = true;
                     tampilkanNotifikasi("NIPPPK Ditemukan di Database. Silakan lengkapi data lainnya dan berkas.", "success");
                 } else {
-                    tampilkanNotifikasi("Data dengan NIPPPK tersebut tidak ditemukan di Master Data Anda.", "error");
+                    // SEKARANG AKAN MENAMPILKAN ALASAN ERROR DARI SCRIPT
+                    const errorMsg = result.message ? result.message : "Data dengan NIPPPK tersebut tidak ditemukan di Master Data Anda.";
+                    tampilkanNotifikasi("GAGAL: " + errorMsg, "error");
                     resetForm();
                 }
             } catch (error) {
@@ -487,7 +489,7 @@
             };
 
             // JALANKAN SIMULASI KIRIM JIKA LINK GOOGLE SCRIPT BELUM DIISI
-            if(APPS_SCRIPT_URL === "ISI_DENGAN_URL_WEB_APP_ANDA_DISINI") {
+            if(APPS_SCRIPT_URL === "https://script.google.com/macros/s/AKfycbz-Eht-CXRKZ371bHQOWHDZKk09aGpApzEsMKHry-C2eeT7hoiNI2Oqbok4L1QKZ235/exec") {
                 setTimeout(() => {
                     document.getElementById('confirmationOverlay').classList.add('hidden');
                     document.getElementById('successMessage').classList.remove('hidden');
