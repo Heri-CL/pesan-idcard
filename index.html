@@ -53,6 +53,21 @@
             mix-blend-mode: multiply; filter: contrast(1.1) brightness(1.05);
         }
 
+        /* Watermark Tulisan SAMPLE */
+        .sample-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: rgba(0, 0, 0, 0.12); /* Hitam transparan */
+            z-index: 50; /* Berada di atas elemen lain */
+            pointer-events: none; /* Agar tidak mengganggu saat di-klik */
+            letter-spacing: 0.5rem;
+            user-select: none;
+        }
+
         /* Spinner Loading */
         .loader {
             border: 3px solid #f3f3f3; border-top: 3px solid #3498db;
@@ -172,8 +187,9 @@
             <div class="flex flex-col md:flex-row gap-6 mb-8 items-center">
                 <!-- BAGIAN DEPAN -->
                 <div class="id-card flex flex-col items-center pt-5 bg-white">
+                    <div class="sample-overlay">SAMPLE</div>
                     <div class="card-header-curve"></div>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Coat_of_arms_of_Jakarta.svg/800px-Coat_of_arms_of_Jakarta.svg.png" alt="Logo DKI" class="h-16 z-10 mt-1 drop-shadow-md">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Coat_of_arms_of_Jakarta.svg" alt="Logo DKI" class="h-16 z-10 mt-1 drop-shadow-md">
                     <div class="z-10 font-bold text-center text-[13px] mt-2 mb-3 leading-tight tracking-wide">PEMERINTAH PROVINSI<br>DKI JAKARTA</div>
                     
                     <div class="z-10 w-28 h-36 border border-gray-400 bg-[#fcd34d] rounded-lg overflow-hidden shadow-sm flex items-center justify-center">
@@ -197,8 +213,9 @@
 
                 <!-- BAGIAN BELAKANG -->
                 <div class="id-card flex flex-col p-4 bg-white relative">
+                    <div class="sample-overlay">SAMPLE</div>
                     <div class="card-header-curve" style="height: 60px; border-radius: 0 0 50% 50%;"></div>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Coat_of_arms_of_Jakarta.svg/800px-Coat_of_arms_of_Jakarta.svg.png" alt="Watermark" class="watermark">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Coat_of_arms_of_Jakarta.svg" alt="Watermark" class="watermark">
                     <div class="z-10 mt-14 text-[11px] leading-[1.4] w-full px-2">
                         <table class="w-full">
                             <tr><td class="w-[70px] align-top py-0.5">Nama</td><td class="w-2 align-top py-0.5">:</td><td class="font-medium align-top py-0.5"><span id="cardNamaBelakang"></span></td></tr>
