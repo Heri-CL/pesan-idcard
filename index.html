@@ -24,23 +24,10 @@
             flex-shrink: 0;
         }
         
-        /* Curve hanya untuk bagian belakang sekarang */
-        .card-header-curve {
-            position: absolute; top: 0; left: 0; right: 0; height: 100px;
-            background-color: #cb2d2d;
-            border-bottom-left-radius: 50% 20%; border-bottom-right-radius: 50% 20%;
-            z-index: 1;
-        }
-        .card-footer-curve {
-            position: absolute; bottom: 0; left: -10%; right: -10%; height: 60px;
-            background-color: #cb2d2d;
-            border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
-            z-index: 1;
-        }
-        
+        /* Watermark Diperbesar 350px */
         .watermark {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 210px; opacity: 0.15; z-index: 0;
+            width: 350px; max-width: none; opacity: 0.10; z-index: 1;
         }
 
         .photo-blend {
@@ -55,7 +42,7 @@
             transform: translate(-50%, -50%) rotate(-45deg);
             font-size: 3.5rem;
             font-weight: 900;
-            color: rgba(0, 0, 0, 0.20); 
+            color: rgba(0, 0, 0, 0.15); 
             z-index: 50; 
             pointer-events: none; 
             letter-spacing: 0.5rem;
@@ -174,77 +161,91 @@
             
             <div class="flex flex-col md:flex-row gap-6 mb-8 items-center">
                 
-                <!-- BAGIAN DEPAN (DESAIN BARU JAKCARD PRESISI) -->
+                <!-- BAGIAN DEPAN (DESAIN BARU JAKCARD WATERCOLOR) -->
                 <div class="id-card flex flex-col bg-white relative">
                     
                     <!-- Latar Belakang Abstrak Merah JakCard -->
-                    <div class="absolute right-0 top-0 bottom-0 w-[160px] overflow-hidden z-0 pointer-events-none">
-                        <div class="absolute right-[-20px] top-[30%] w-24 h-32 bg-[#e61e25] rounded-full opacity-90 transform rotate-12"></div>
-                        <div class="absolute right-[20px] top-[40%] w-16 h-16 bg-[#b91116] rounded-full"></div>
-                        <div class="absolute right-[-30px] top-[48%] w-40 h-40 bg-[#d11118] rounded-full"></div>
-                        <div class="absolute right-[5px] bottom-[18%] w-24 h-24 bg-[#ed3037] rounded-full"></div>
-                        <div class="absolute right-[-20px] bottom-[-20px] w-40 h-40 bg-[#b91116] rounded-full"></div>
-                        <div class="absolute right-[50px] bottom-[20%] w-12 h-12 bg-pink-400 rounded-full opacity-50 transform rotate-45"></div>
-                        <div class="absolute right-[40px] top-[35%] w-10 h-16 bg-[#ed3037] rounded-full opacity-80 transform -rotate-12"></div>
-                        <div class="absolute right-[70px] top-[55%] w-6 h-6 bg-[#b91116] rounded-full opacity-90"></div>
-                        <div class="absolute right-[20px] bottom-[5%] w-10 h-10 bg-white opacity-20 rounded-full"></div>
+                    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-white">
+                        <div class="absolute bottom-[-50px] right-[-50px] w-[350px] h-[300px] bg-[#e61e25] opacity-80" style="border-radius: 40% 60% 30% 70% / 50% 40% 60% 50%; filter: blur(2px);"></div>
+                        <div class="absolute bottom-[-20px] right-[-10px] w-[250px] h-[200px] bg-[#bd0b10] opacity-90" style="border-radius: 60% 40% 50% 50% / 40% 50% 60% 60%;"></div>
+                        <div class="absolute bottom-[40px] right-[40px] w-[200px] h-[150px] bg-[#ff4d52] opacity-70" style="border-radius: 50%; filter: blur(4px);"></div>
+                        <div class="absolute right-[20px] top-[30%] w-12 h-16 bg-[#e61e25] rounded-[50%_50%_50%_50%/60%_60%_40%_40%] transform -rotate-12 opacity-85"></div>
+                        <div class="absolute right-[60px] top-[42%] w-10 h-10 bg-[#bd0b10] rounded-full opacity-95"></div>
+                        <div class="absolute right-[40px] top-[22%] w-8 h-12 bg-[#ff8c90] rounded-[50%_50%_50%_50%/60%_60%_40%_40%] opacity-70"></div>
+                        <div class="absolute right-[80px] top-[55%] w-14 h-14 bg-[#ff4d52] rounded-full opacity-90"></div>
+                        <div class="absolute right-[110px] top-[45%] w-5 h-5 bg-[#e61e25] rounded-full"></div>
+                        <div class="absolute bottom-[10px] left-[-20px] w-[180px] h-[80px] bg-[#ff4d52] opacity-60" style="border-radius: 20% 80% 20% 80% / 100% 100% 0% 0%; filter: blur(3px);"></div>
                     </div>
 
                     <div class="sample-overlay z-50">SAMPLE</div>
                     
                     <!-- Header (Logo di kiri, Teks di kanan) -->
-                    <div class="flex items-center justify-start z-10 w-full px-5 mt-6">
-                        <img src="logo.png?v=1" alt="Logo DKI" class="h-14 w-auto drop-shadow-sm" onerror="this.src='https://placehold.co/100x100/ffffff/000000?text=LOGO'">
+                    <div class="flex items-center justify-start z-10 w-full px-5 mt-5">
+                        <img src="logo.png?v=1" alt="Logo DKI" class="h-12 w-auto drop-shadow-sm" onerror="this.src='https://placehold.co/100x100/ffffff/000000?text=LOGO'">
                         <div class="font-bold text-left text-[13px] leading-[1.15] text-gray-800 tracking-wide uppercase ml-3">
                             PEMERINTAH PROVINSI<br>DKI JAKARTA
                         </div>
                     </div>
                     
-                    <!-- Konten Kiri (Foto & Teks) -->
-                    <div class="flex flex-col items-start pl-6 mt-4 z-10 w-full">
+                    <!-- Konten Tengah (Foto & Teks) -->
+                    <div class="flex flex-col items-center mt-7 z-10 w-full px-4">
                         <!-- Tempat Foto Profil -->
-                        <div class="w-[130px] h-[170px] border-[2px] border-[#ea580c] rounded-sm overflow-hidden shadow-md bg-gray-100 flex items-center justify-center relative">
+                        <div class="w-[125px] h-[160px] border-[1px] border-[#ea580c] p-0.5 rounded-sm overflow-hidden shadow-sm bg-white flex items-center justify-center relative">
                             <img id="cardPhoto" src="" alt="Foto Profil" class="w-full h-full object-cover hidden">
                         </div>
                         
                         <!-- Teks Nama & NIP (Di bawah foto) -->
-                        <div class="mt-3 text-left w-[160px]">
-                            <div id="cardNamaDepan" class="font-extrabold uppercase text-[15px] text-gray-900 leading-[1.1] drop-shadow-sm truncate">NAMA ANDA</div>
-                            <div class="text-[13px] font-bold text-gray-900 mt-0.5 drop-shadow-sm">NIP. <span id="cardNipDepan">NIP</span></div>
+                        <div class="mt-4 text-center w-full">
+                            <div id="cardNamaDepan" class="font-bold uppercase text-[16px] text-gray-900 leading-[1.1] drop-shadow-sm truncate">NAMA ANDA</div>
+                            <div class="text-[13px] font-semibold text-gray-900 mt-1 drop-shadow-sm">NIP. <span id="cardNipDepan">NIP</span></div>
                         </div>
                     </div>
                     
                     <!-- Logo JakCard -->
-                    <div class="z-10 absolute bottom-3 right-4 flex items-center italic font-bold text-gray-800 text-[18px] tracking-tighter drop-shadow-sm">
-                        <span class="text-[#e61e25] mr-1 text-[13px]">▲</span> jak<span class="font-normal">card</span>
+                    <div class="z-10 absolute bottom-3 right-4 flex items-center italic font-bold text-gray-800 text-[17px] tracking-tighter drop-shadow-sm">
+                        <span class="text-[#e61e25] mr-1 text-[12px]">▲</span> jak<span class="font-normal">card</span>
                     </div>
                 </div>
 
-                <!-- BAGIAN BELAKANG (TETAP SAMA NAMUN WATERMARK 350px) -->
+                <!-- BAGIAN BELAKANG (TANPA LOGO HEADER & JAKCARD) -->
                 <div class="id-card flex flex-col p-4 bg-white relative">
+                    
+                    <!-- Latar Belakang Abstrak Merah JakCard (Sama dengan Depan) -->
+                    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-white">
+                        <div class="absolute bottom-[-50px] right-[-50px] w-[350px] h-[300px] bg-[#e61e25] opacity-80" style="border-radius: 40% 60% 30% 70% / 50% 40% 60% 50%; filter: blur(2px);"></div>
+                        <div class="absolute bottom-[-20px] right-[-10px] w-[250px] h-[200px] bg-[#bd0b10] opacity-90" style="border-radius: 60% 40% 50% 50% / 40% 50% 60% 60%;"></div>
+                        <div class="absolute bottom-[40px] right-[40px] w-[200px] h-[150px] bg-[#ff4d52] opacity-70" style="border-radius: 50%; filter: blur(4px);"></div>
+                        <div class="absolute right-[20px] top-[30%] w-12 h-16 bg-[#e61e25] rounded-[50%_50%_50%_50%/60%_60%_40%_40%] transform -rotate-12 opacity-85"></div>
+                        <div class="absolute right-[60px] top-[42%] w-10 h-10 bg-[#bd0b10] rounded-full opacity-95"></div>
+                        <div class="absolute right-[40px] top-[22%] w-8 h-12 bg-[#ff8c90] rounded-[50%_50%_50%_50%/60%_60%_40%_40%] opacity-70"></div>
+                        <div class="absolute right-[80px] top-[55%] w-14 h-14 bg-[#ff4d52] rounded-full opacity-90"></div>
+                        <div class="absolute right-[110px] top-[45%] w-5 h-5 bg-[#e61e25] rounded-full"></div>
+                        <div class="absolute bottom-[10px] left-[-20px] w-[180px] h-[80px] bg-[#ff4d52] opacity-60" style="border-radius: 20% 80% 20% 80% / 100% 100% 0% 0%; filter: blur(3px);"></div>
+                    </div>
+
                     <div class="sample-overlay z-50">SAMPLE</div>
-                    <div class="card-header-curve" style="height: 60px; border-radius: 0 0 50% 50%;"></div>
                     
-                    <!-- PEMANGGILAN LOGO DARI GITHUB SEBAGAI WATERMARK -->
-                    <img src="logo.png?v=1" alt="Watermark" class="watermark" style="width: 350px; max-width: none;" onerror="this.src='https://placehold.co/350x350/ffffff/000000?text=WATERMARK'">
+                    <!-- PEMANGGILAN LOGO DARI GITHUB SEBAGAI WATERMARK 350px -->
+                    <img src="logo.png?v=1" alt="Watermark" class="watermark" onerror="this.src='https://placehold.co/350x350/ffffff/000000?text=WATERMARK'">
                     
-                    <div class="z-10 mt-14 text-[11px] leading-[1.4] w-full px-2">
-                        <table class="w-full">
-                            <tr><td class="w-[70px] align-top py-0.5">Nama</td><td class="w-2 align-top py-0.5">:</td><td class="font-medium align-top py-0.5"><span id="cardNamaBelakang"></span></td></tr>
-                            <tr><td class="align-top py-0.5">NIPPPK</td><td class="align-top py-0.5">:</td><td class="align-top py-0.5"><span id="cardNipBelakang"></span></td></tr>
-                            <tr><td class="align-top py-0.5">Jabatan</td><td class="align-top py-0.5">:</td><td class="align-top py-0.5 leading-tight"><span id="cardJabatan"></span></td></tr>
-                            <tr><td class="align-top py-0.5">Unit Kerja</td><td class="align-top py-0.5">:</td><td class="align-top py-0.5 leading-tight"><span id="cardUnitKerja"></span></td></tr>
-                            <tr><td class="align-top py-0.5">Gol. Darah</td><td class="align-top py-0.5">:</td><td class="align-top py-0.5"><span id="cardGolDarah"></span></td></tr>
-                            <tr><td class="align-top py-0.5">Alamat<br>Kantor</td><td class="align-top py-0.5">:</td><td class="align-top py-0.5 leading-tight text-[10px] text-justify pr-1" id="cardAlamat"></td></tr>
+                    <!-- Konten Tabel Data (Digeser sedikit ke atas karena tidak ada header logo) -->
+                    <div class="z-20 mt-10 text-[11px] leading-[1.4] w-full px-2">
+                        <table class="w-full relative z-20">
+                            <tr><td class="w-[70px] align-top py-0.5 font-semibold text-gray-800">Nama</td><td class="w-2 align-top py-0.5">:</td><td class="font-bold align-top py-0.5 text-gray-900"><span id="cardNamaBelakang"></span></td></tr>
+                            <tr><td class="align-top py-0.5 font-semibold text-gray-800">NIPPPK</td><td class="align-top py-0.5">:</td><td class="font-medium align-top py-0.5 text-gray-900"><span id="cardNipBelakang"></span></td></tr>
+                            <tr><td class="align-top py-0.5 font-semibold text-gray-800">Jabatan</td><td class="align-top py-0.5">:</td><td class="font-medium align-top py-0.5 text-gray-900 leading-tight"><span id="cardJabatan"></span></td></tr>
+                            <tr><td class="align-top py-0.5 font-semibold text-gray-800">Unit Kerja</td><td class="align-top py-0.5">:</td><td class="font-medium align-top py-0.5 text-gray-900 leading-tight"><span id="cardUnitKerja"></span></td></tr>
+                            <tr><td class="align-top py-0.5 font-semibold text-gray-800">Gol. Darah</td><td class="align-top py-0.5">:</td><td class="font-medium align-top py-0.5 text-gray-900"><span id="cardGolDarah"></span></td></tr>
+                            <tr><td class="align-top py-0.5 font-semibold text-gray-800">Alamat<br>Kantor</td><td class="align-top py-0.5">:</td><td class="font-medium align-top py-0.5 text-gray-900 leading-tight text-[10px] text-justify pr-1" id="cardAlamat"></td></tr>
                         </table>
                     </div>
-                    <div class="z-10 mt-auto mb-10 w-full text-center text-[10px]">
-                        <p class="mb-0">Walikota</p>
-                        <p class="mb-8">Kota Administrasi Jakarta Barat</p>
+                    
+                    <div class="z-20 mt-auto mb-12 w-full text-center text-[10px] text-gray-900">
+                        <p class="mb-0 font-medium">Walikota</p>
+                        <p class="mb-8 font-medium">Kota Administrasi Jakarta Barat</p>
                         <p class="font-bold underline text-[11px]">Iin Mutmainnah</p>
-                        <p>NIP. 197103271991012001</p>
+                        <p class="font-medium">NIP. 197103271991012001</p>
                     </div>
-                    <div class="card-footer-curve"></div>
                 </div>
             </div>
             
