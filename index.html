@@ -159,16 +159,10 @@
                     <textarea id="alamatKantorInput" rows="3" placeholder="Isi alamat kantor secara manual..." class="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none resize-none transition-colors"></textarea>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="fotoInput" class="block text-sm font-medium text-gray-700 mb-1">Unggah Foto (Untuk ID Card) <span class="text-red-500">*</span></label>
-                        <input type="file" id="fotoInput" accept=".jpg, .jpeg, .png" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white cursor-pointer">
-                        <p class="text-[10px] text-blue-600 mt-1 font-medium">(Untuk ID Card latar belakang warna putih pakaian Hakki lengkap dengan atribut).</p>
-                    </div>
-                    <div>
-                        <label for="buktiInput" class="block text-sm font-medium text-gray-700 mb-1">Unggah Bukti Pembayaran <span class="text-red-500">*</span></label>
-                        <input type="file" id="buktiInput" accept=".jpg, .jpeg, .png" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white cursor-pointer">
-                    </div>
+                <div>
+                    <label for="fotoInput" class="block text-sm font-medium text-gray-700 mb-1">Unggah Foto (Untuk ID Card) <span class="text-red-500">*</span></label>
+                    <input type="file" id="fotoInput" accept=".jpg, .jpeg, .png" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white cursor-pointer">
+                    <p class="text-[10px] text-blue-600 mt-1 font-medium">(Untuk ID Card latar belakang warna putih pakaian Hakki lengkap dengan atribut).</p>
                 </div>
             </div>
 
@@ -190,7 +184,7 @@
                     <div class="sample-overlay">SAMPLE</div>
                     <div class="card-header-curve"></div>
                     
-                    <!-- INI MENGGUNAKAN LOGO LOKAL GITHUB -->
+                    <!-- PEMANGGILAN LOGO DARI GITHUB -->
                     <img src="logo.png?v=1" alt="Logo DKI" class="h-16 z-10 mt-1 drop-shadow-md" onerror="this.src='https://placehold.co/100x100/ffffff/000000?text=LOGO'">
                     
                     <div class="z-10 font-bold text-center text-[13px] mt-2 mb-3 leading-tight tracking-wide">PEMERINTAH PROVINSI<br>DKI JAKARTA</div>
@@ -219,7 +213,7 @@
                     <div class="sample-overlay">SAMPLE</div>
                     <div class="card-header-curve" style="height: 60px; border-radius: 0 0 50% 50%;"></div>
                     
-                    <!-- INI MENGGUNAKAN LOGO LOKAL GITHUB SEBAGAI WATERMARK -->
+                    <!-- PEMANGGILAN LOGO DARI GITHUB SEBAGAI WATERMARK -->
                     <img src="logo.png?v=1" alt="Watermark" class="watermark" onerror="this.src='https://placehold.co/150x150/ffffff/000000?text=WATERMARK'">
                     
                     <div class="z-10 mt-14 text-[11px] leading-[1.4] w-full px-2">
@@ -269,7 +263,7 @@
                     <p class="text-sm text-gray-600 mb-1">Total yang harus dibayar:</p>
                     <p id="displayNominalBayar" class="text-3xl font-extrabold text-blue-700 mb-4 tracking-tight">Rp 50.000,-</p>
                     
-                    <!-- INI MENGGUNAKAN LOGO LOKAL GITHUB -->
+                    <!-- PEMANGGILAN GAMBAR QRIS DARI GITHUB -->
                     <img id="qrisImageDisplay" src="qris.jpeg?v=1" alt="QRIS DANA" class="w-56 h-56 rounded-lg shadow-sm border border-gray-200 p-2 bg-white mb-3 object-contain" onerror="this.src='https://placehold.co/300x300/ffffff/000000?text=QRIS+Belum+Diunggah'">
                     <p class="font-bold text-blue-800 tracking-wider">SCAN QRIS</p>
                 </div>
