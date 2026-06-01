@@ -24,6 +24,7 @@
             flex-shrink: 0;
         }
         
+        /* Curve hanya untuk bagian belakang sekarang */
         .card-header-curve {
             position: absolute; top: 0; left: 0; right: 0; height: 100px;
             background-color: #cb2d2d;
@@ -37,18 +38,10 @@
             z-index: 1;
         }
         
-        /* Watermark Diperbesar agar sesuai referensi */
         .watermark {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             width: 210px; opacity: 0.15; z-index: 0;
         }
-
-        .barcode {
-            display: flex; height: 35px; width: 80%; margin: 10px auto 0; justify-content: center;
-        }
-        .barcode div { background: black; height: 100%; }
-        .bc-1 { width: 3px; margin-right: 2px; } .bc-2 { width: 1px; margin-right: 3px; }
-        .bc-3 { width: 4px; margin-right: 1px; } .bc-4 { width: 2px; margin-right: 2px; }
 
         .photo-blend {
             mix-blend-mode: multiply; filter: contrast(1.1) brightness(1.05);
@@ -175,48 +168,55 @@
         </form>
 
         <!-- Overlay Konfirmasi ID Card -->
-        <div id="confirmationOverlay" class="absolute inset-0 bg-gray-900/90 backdrop-blur-sm z-10 flex flex-col items-center py-10 px-4 hidden overflow-y-auto">
+        <div id="confirmationOverlay" class="absolute inset-0 bg-gray-900/90 backdrop-blur-sm z-20 flex flex-col items-center py-10 px-4 hidden overflow-y-auto">
             <h2 class="text-2xl font-bold text-white mb-2 text-center">Preview ID Card</h2>
             <p class="text-gray-300 mb-8 text-center text-sm">Pastikan data dan foto pada kartu di bawah ini sudah sesuai.</p>
             
             <div class="flex flex-col md:flex-row gap-6 mb-8 items-center">
-                <!-- BAGIAN DEPAN -->
-                <div class="id-card flex flex-col items-center pt-2 bg-white">
-                    <div class="sample-overlay">SAMPLE</div>
-                    <div class="card-header-curve" style="height: 110px;"></div>
+                
+                <!-- BAGIAN DEPAN (DESAIN BARU JAKCARD) -->
+                <div class="id-card flex flex-col pt-6 px-4 bg-white relative">
                     
-                    <!-- PEMANGGILAN LOGO DARI GITHUB (Diperbesar 120px, spacing dirapatkan ke atas) -->
-                    <img src="logo.png?v=1" alt="Logo DKI" class="h-[120px] w-auto z-10 mt-1 drop-shadow-md" onerror="this.src='https://placehold.co/120x120/ffffff/000000?text=LOGO'">
+                    <!-- Latar Belakang Abstrak Merah (Dibuat murni dengan CSS agar tidak perlu upload gambar lagi) -->
+                    <div class="absolute bottom-[-20px] right-[-30px] w-48 h-64 bg-[#e61e25] opacity-90 z-0" style="border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;"></div>
+                    <div class="absolute bottom-10 right-4 w-32 h-32 bg-[#d11118] opacity-80 z-0" style="border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;"></div>
+                    <div class="absolute top-[40%] right-[-10px] w-24 h-32 bg-[#ed3037] opacity-80 z-0" style="border-radius: 50% 20% 60% 40%;"></div>
+                    <div class="absolute bottom-[20%] right-[35%] w-16 h-16 bg-[#b91116] opacity-90 z-0" style="border-radius: 50%;"></div>
+                    <div class="absolute bottom-[35%] right-[10%] w-12 h-12 bg-white opacity-40 z-0" style="border-radius: 50%;"></div>
+
+                    <div class="sample-overlay z-50">SAMPLE</div>
                     
-                    <!-- Tulisan PEMERINTAH PROVINSI DKI JAKARTA (Diperbesar, dirapatkan dengan logo) -->
-                    <div class="z-10 font-bold text-center text-[15px] mt-0 mb-3 leading-tight tracking-wide">PEMERINTAH PROVINSI<br>DKI JAKARTA</div>
-                    
-                    <!-- Tempat Foto Profil (Diperbesar & Proporsional) -->
-                    <div class="z-10 w-32 h-40 border border-gray-400 bg-[#fcd34d] rounded-lg overflow-hidden shadow-sm flex items-center justify-center">
-                        <img id="cardPhoto" src="" alt="Foto Profil" class="w-full h-full object-cover hidden photo-blend">
+                    <!-- Header (Logo di kiri, Teks di kanan) -->
+                    <div class="flex items-center gap-3 z-10 w-full mb-5">
+                        <img src="logo.png?v=1" alt="Logo DKI" class="h-12 w-auto drop-shadow-sm" onerror="this.src='https://placehold.co/100x100/ffffff/000000?text=LOGO'">
+                        <div class="font-bold text-left text-[14px] leading-[1.1] text-gray-800 tracking-wide uppercase">
+                            PEMERINTAH PROVINSI<br>DKI JAKARTA
+                        </div>
                     </div>
                     
-                    <div class="z-10 mt-4 text-center w-full px-4">
-                        <div id="cardNamaDepan" class="font-bold uppercase text-[16px] truncate">NAMA</div>
-                        <div class="text-[14px] mt-0.5">NIPPPK. <span id="cardNipDepan">NIP</span></div>
+                    <!-- Tempat Foto Profil -->
+                    <div class="z-10 w-[140px] h-[175px] mx-auto border-[3px] border-[#ea580c] rounded-sm overflow-hidden shadow-md bg-gray-100 flex items-center justify-center relative">
+                        <img id="cardPhoto" src="" alt="Foto Profil" class="w-full h-full object-cover hidden">
                     </div>
-                    <div class="barcode z-10 opacity-80 mt-3 mb-1">
-                        <div class="bc-1"></div><div class="bc-2"></div><div class="bc-4"></div><div class="bc-2"></div>
-                        <div class="bc-3"></div><div class="bc-1"></div><div class="bc-2"></div><div class="bc-3"></div>
-                        <div class="bc-2"></div><div class="bc-4"></div><div class="bc-1"></div><div class="bc-2"></div>
-                        <div class="bc-3"></div><div class="bc-1"></div><div class="bc-2"></div><div class="bc-1"></div>
-                        <div class="bc-2"></div><div class="bc-4"></div><div class="bc-2"></div><div class="bc-3"></div>
-                        <div class="bc-1"></div><div class="bc-3"></div><div class="bc-2"></div><div class="bc-1"></div>
+                    
+                    <!-- Teks Nama & NIP (Di bawah foto) -->
+                    <div class="z-10 mt-3 text-center w-full">
+                        <div id="cardNamaDepan" class="font-extrabold uppercase text-[17px] text-gray-900 truncate leading-tight drop-shadow-sm">NAMA ANDA</div>
+                        <div class="text-[14px] font-bold text-gray-900 mt-0 drop-shadow-sm">NIP. <span id="cardNipDepan">NIP</span></div>
                     </div>
-                    <div class="card-footer-curve" style="height: 50px;"></div>
+                    
+                    <!-- Logo JakCard -->
+                    <div class="z-10 absolute bottom-3 right-4 flex items-center italic font-bold text-gray-800 text-[19px] tracking-tighter">
+                        <span class="text-[#e61e25] mr-1 text-[14px]">▲</span> jak<span class="font-normal">card</span>
+                    </div>
                 </div>
 
-                <!-- BAGIAN BELAKANG -->
+                <!-- BAGIAN BELAKANG (TETAP SAMA) -->
                 <div class="id-card flex flex-col p-4 bg-white relative">
-                    <div class="sample-overlay">SAMPLE</div>
+                    <div class="sample-overlay z-50">SAMPLE</div>
                     <div class="card-header-curve" style="height: 60px; border-radius: 0 0 50% 50%;"></div>
                     
-                    <!-- PEMANGGILAN LOGO DARI GITHUB SEBAGAI WATERMARK (Diperbesar 500px) -->
+                    <!-- PEMANGGILAN LOGO DARI GITHUB SEBAGAI WATERMARK -->
                     <img src="logo.png?v=1" alt="Watermark" class="watermark" style="width: 500px; max-width: none;" onerror="this.src='https://placehold.co/500x500/ffffff/000000?text=WATERMARK'">
                     
                     <div class="z-10 mt-14 text-[11px] leading-[1.4] w-full px-2">
@@ -253,7 +253,7 @@
         </div>
 
         <!-- Overlay Pembayaran (QRIS & Upload Bukti) -->
-        <div id="paymentOverlay" class="absolute inset-0 bg-gray-900/95 backdrop-blur-md z-20 flex flex-col items-center justify-center p-4 hidden overflow-y-auto">
+        <div id="paymentOverlay" class="absolute inset-0 bg-gray-900/95 backdrop-blur-md z-30 flex flex-col items-center justify-center p-4 hidden overflow-y-auto">
             <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 sm:p-8 fade-in">
                 
                 <div class="text-center mb-6">
@@ -299,7 +299,7 @@
         </div>
         
         <!-- Pesan Sukses -->
-        <div id="successMessage" class="absolute inset-0 bg-white z-30 flex flex-col items-center justify-center p-6 hidden fade-in text-center">
+        <div id="successMessage" class="absolute inset-0 bg-white z-40 flex flex-col items-center justify-center p-6 hidden fade-in text-center">
              <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
