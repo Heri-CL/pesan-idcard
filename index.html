@@ -165,10 +165,12 @@
                 <!-- BAGIAN DEPAN (MENGGUNAKAN BACKGROUND BLANGKO.PNG) -->
                 <div class="id-card relative bg-[url('blangko.png?v=1')] bg-cover bg-center bg-no-repeat bg-white">
                     
-                    <!-- Kotak Foto Custom (Latar Kuning, List Merah) -->
+                    <!-- Kotak Foto Custom (Latar Kuning, List Hitam Dipertebal) -->
                     <!-- Posisi 'top-[100px]' diatur agar pas berada di bawah header blangko -->
-                    <div class="absolute top-[105px] left-1/2 transform -translate-x-1/2 w-[160px] h-[200px] border-[2px] border-[#e61e25] rounded-xl bg-[#fcd34d] overflow-hidden z-10 flex items-center justify-center">
-                        <img id="cardPhoto" src="" alt="Foto Profil" class="w-full h-full object-cover hidden">
+                    <!-- BORDER DIUBAH: dari border-[2px] border-[#e61e25] menjadi border-[3px] border-black -->
+                    <div class="absolute top-[105px] left-1/2 transform -translate-x-1/2 w-[160px] h-[200px] border-[3px] border-black rounded-xl bg-[#fcd34d] overflow-hidden z-10 flex items-center justify-center">
+                        <!-- class 'photo-blend' ditambahkan agar background putih pas foto berubah menyatu dengan background kuning '#fcd34d' -->
+                        <img id="cardPhoto" src="" alt="Foto Profil" class="w-full h-full object-cover hidden photo-blend">
                     </div>
                     
                     <!-- Teks Nama & NIP (Di bawah kotak foto) -->
@@ -178,6 +180,10 @@
                         <div class="text-[14px] font-bold text-gray-900 mt-0.5 drop-shadow-sm">NIPPPK. <span id="cardNipDepan">NIP</span></div>
                     </div>
                     
+                    <!-- QR CODE (BARCODE) -->
+                    <div class="absolute bottom-[20px] left-1/2 transform -translate-x-1/2 z-10 bg-white p-1 rounded-md shadow-sm border border-gray-200">
+                        <img id="cardQrCode" src="" alt="QR Code Data" class="w-[50px] h-[50px] object-contain hidden" onerror="this.style.display='none'">
+                    </div>
                 </div>
 
                 <!-- BAGIAN BELAKANG (POLOS, TANPA CORAK MERAH, TANPA HEADER) -->
@@ -479,6 +485,19 @@
                 cardElements.golDarah.textContent = inputs.golDarah.value;
                 cardElements.alamat.textContent = inputs.alamat.value;
                 cardElements.foto.classList.remove('hidden');
+
+                // --- GENERATE QR CODE DINAMIS ---
+                // Format data untuk QR Code (menggunakan vCard/Teks standar agar mudah dibaca semua scanner)
+                const qrData = `NIPPPK: ${nipInput.value}\nNama: ${inputs.nama.value}\nJabatan: ${inputs.jabatan.value}\nUnit Kerja: ${inputs.unitKerja.value}\nAlamat Kantor: ${inputs.alamat.value}`;
+                
+                // Gunakan Google Chart API (gratis, sangat stabil) untuk generate QR Code secara instan
+                // Encode URL agar karakter spasi dan baris baru terbaca benar di link API
+                const qrUrl = `https://chart.googleapis.com/chart?cht=qr&chl=${encodeURIComponent(qrData)}&chs=150x150&choe=UTF-8&chld=L|0`;
+                
+                const qrImgElement = document.getElementById('cardQrCode');
+                qrImgElement.src = qrUrl;
+                qrImgElement.classList.remove('hidden');
+                // --------------------------------
 
                 document.getElementById('confirmationOverlay').classList.remove('hidden');
             }
