@@ -181,25 +181,26 @@
             
             <div class="flex flex-col md:flex-row gap-6 mb-8 items-center">
                 <!-- BAGIAN DEPAN -->
-                <div class="id-card flex flex-col items-center pt-4 bg-white">
+                <div class="id-card flex flex-col items-center pt-2 bg-white">
                     <div class="sample-overlay">SAMPLE</div>
-                    <div class="card-header-curve"></div>
+                    <div class="card-header-curve" style="height: 110px;"></div>
                     
-                    <!-- PEMANGGILAN LOGO DARI GITHUB (Diperbesar h-20, spacing dirapatkan) -->
-                    <img src="logo.png?v=1" alt="Logo DKI" class="h-20 w-auto z-10 mt-1 drop-shadow-md" onerror="this.src='https://placehold.co/100x100/ffffff/000000?text=LOGO'">
+                    <!-- PEMANGGILAN LOGO DARI GITHUB (Diperbesar 120px, spacing dirapatkan ke atas) -->
+                    <img src="logo.png?v=1" alt="Logo DKI" class="h-[120px] w-auto z-10 mt-1 drop-shadow-md" onerror="this.src='https://placehold.co/120x120/ffffff/000000?text=LOGO'">
                     
-                    <!-- Spasi margin atas (mt) dikurangi agar lebih rapat dengan logo -->
-                    <div class="z-10 font-bold text-center text-[13px] mt-1 mb-3 leading-tight tracking-wide">PEMERINTAH PROVINSI<br>DKI JAKARTA</div>
+                    <!-- Tulisan PEMERINTAH PROVINSI DKI JAKARTA (Diperbesar, dirapatkan dengan logo) -->
+                    <div class="z-10 font-bold text-center text-[15px] mt-0 mb-3 leading-tight tracking-wide">PEMERINTAH PROVINSI<br>DKI JAKARTA</div>
                     
-                    <div class="z-10 w-28 h-36 border border-gray-400 bg-[#fcd34d] rounded-lg overflow-hidden shadow-sm flex items-center justify-center">
+                    <!-- Tempat Foto Profil (Diperbesar & Proporsional) -->
+                    <div class="z-10 w-32 h-40 border border-gray-400 bg-[#fcd34d] rounded-lg overflow-hidden shadow-sm flex items-center justify-center">
                         <img id="cardPhoto" src="" alt="Foto Profil" class="w-full h-full object-cover hidden photo-blend">
                     </div>
                     
                     <div class="z-10 mt-4 text-center w-full px-4">
-                        <div id="cardNamaDepan" class="font-bold uppercase text-[15px] truncate">NAMA</div>
-                        <div class="text-[13px] mt-0.5">NIPPPK. <span id="cardNipDepan">NIP</span></div>
+                        <div id="cardNamaDepan" class="font-bold uppercase text-[16px] truncate">NAMA</div>
+                        <div class="text-[14px] mt-0.5">NIPPPK. <span id="cardNipDepan">NIP</span></div>
                     </div>
-                    <div class="barcode z-10 opacity-80 mt-3">
+                    <div class="barcode z-10 opacity-80 mt-3 mb-1">
                         <div class="bc-1"></div><div class="bc-2"></div><div class="bc-4"></div><div class="bc-2"></div>
                         <div class="bc-3"></div><div class="bc-1"></div><div class="bc-2"></div><div class="bc-3"></div>
                         <div class="bc-2"></div><div class="bc-4"></div><div class="bc-1"></div><div class="bc-2"></div>
@@ -207,7 +208,7 @@
                         <div class="bc-2"></div><div class="bc-4"></div><div class="bc-2"></div><div class="bc-3"></div>
                         <div class="bc-1"></div><div class="bc-3"></div><div class="bc-2"></div><div class="bc-1"></div>
                     </div>
-                    <div class="card-footer-curve"></div>
+                    <div class="card-footer-curve" style="height: 50px;"></div>
                 </div>
 
                 <!-- BAGIAN BELAKANG -->
@@ -215,8 +216,8 @@
                     <div class="sample-overlay">SAMPLE</div>
                     <div class="card-header-curve" style="height: 60px; border-radius: 0 0 50% 50%;"></div>
                     
-                    <!-- PEMANGGILAN LOGO DARI GITHUB SEBAGAI WATERMARK -->
-                    <img src="logo.png?v=1" alt="Watermark" class="watermark" onerror="this.src='https://placehold.co/150x150/ffffff/000000?text=WATERMARK'">
+                    <!-- PEMANGGILAN LOGO DARI GITHUB SEBAGAI WATERMARK (Diperbesar 500px) -->
+                    <img src="logo.png?v=1" alt="Watermark" class="watermark" style="width: 500px; max-width: none;" onerror="this.src='https://placehold.co/500x500/ffffff/000000?text=WATERMARK'">
                     
                     <div class="z-10 mt-14 text-[11px] leading-[1.4] w-full px-2">
                         <table class="w-full">
