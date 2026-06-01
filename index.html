@@ -162,19 +162,22 @@
             
             <div class="flex flex-col md:flex-row gap-6 mb-8 items-center">
                 
-                <!-- BAGIAN DEPAN (GAMBAR BLANGKO SEBAGAI BACKGROUND, TULISAN SAMPLE DIHAPUS) -->
+                <!-- BAGIAN DEPAN (MENGGUNAKAN BACKGROUND BLANGKO.PNG) -->
                 <div class="id-card relative bg-[url('blangko.png?v=1')] bg-cover bg-center bg-no-repeat bg-white">
                     
-                    <!-- Kotak Foto: Menggunakan photo-blend agar latar putih foto jadi transparan -->
-                    <div class="absolute top-[106px] left-1/2 transform -translate-x-1/2 w-[152px] h-[196px] overflow-hidden z-10 flex items-center justify-center bg-transparent">
+                    <!-- Kotak Foto Custom (Latar Kuning, List Merah) -->
+                    <!-- Posisi 'top-[100px]' diatur agar pas berada di bawah header blangko -->
+                    <div class="absolute top-[105px] left-1/2 transform -translate-x-1/2 w-[160px] h-[200px] border-[2px] border-[#e61e25] bg-[#fcd34d] overflow-hidden z-10 flex items-center justify-center">
                         <img id="cardPhoto" src="" alt="Foto Profil" class="w-full h-full object-cover hidden photo-blend">
                     </div>
                     
-                    <!-- Teks Nama & NIP (Warna dirubah jadi hitam pekat 'text-black') -->
-                    <div class="absolute top-[320px] w-full text-center z-10 px-2">
-                        <div id="cardNamaDepan" class="font-extrabold uppercase text-[18px] text-black leading-[1.1] drop-shadow-sm truncate">NAMA ANDA</div>
-                        <div class="text-[14px] font-bold text-black mt-1 drop-shadow-sm">NIPPPK. <span id="cardNipDepan">NIP</span></div>
+                    <!-- Teks Nama & NIP (Di bawah kotak foto) -->
+                    <!-- Posisi 'top-[315px]' diatur agar pas berada di bawah foto -->
+                    <div class="absolute top-[315px] w-full text-center z-10 px-2">
+                        <div id="cardNamaDepan" class="font-extrabold uppercase text-[18px] text-gray-900 leading-[1.1] drop-shadow-sm truncate">NAMA ANDA</div>
+                        <div class="text-[14px] font-bold text-gray-900 mt-0.5 drop-shadow-sm">NIPPPK. <span id="cardNipDepan">NIP</span></div>
                     </div>
+                    
                 </div>
 
                 <!-- BAGIAN BELAKANG (POLOS, TANPA CORAK MERAH, TANPA HEADER) -->
