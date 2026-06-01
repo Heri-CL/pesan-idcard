@@ -30,6 +30,7 @@
             width: 350px; max-width: none; opacity: 0.10; z-index: 1;
         }
 
+        /* Mode blend multiply membuat background putih pada foto menyatu dengan warna di belakangnya */
         .photo-blend {
             mix-blend-mode: multiply; filter: contrast(1.1) brightness(1.05);
         }
@@ -161,35 +162,31 @@
             
             <div class="flex flex-col md:flex-row gap-6 mb-8 items-center">
                 
-                <!-- BAGIAN DEPAN (MENGGUNAKAN GAMBAR BLANGKO.PNG SEBAGAI BACKGROUND) -->
-                <!-- Pastikan gambar blangko.png sudah diupload di GitHub -->
+                <!-- BAGIAN DEPAN (GAMBAR BLANGKO SEBAGAI BACKGROUND, TULISAN SAMPLE DIHAPUS) -->
                 <div class="id-card relative bg-[url('blangko.png?v=1')] bg-cover bg-center bg-no-repeat bg-white">
                     
-                    <div class="sample-overlay z-50">SAMPLE</div>
-                    
-                    <!-- Kotak Foto: Posisinya diatur tepat di atas area kotak kuning blangko -->
-                    <!-- Jika kurang pas/geser, nilai top-[105px], w-[154px], h-[200px] bisa disesuaikan sedikit -->
-                    <div class="absolute top-[105px] left-1/2 transform -translate-x-1/2 w-[154px] h-[200px] overflow-hidden z-10 flex items-center justify-center bg-transparent">
-                        <img id="cardPhoto" src="" alt="Foto Profil" class="w-full h-full object-cover hidden">
+                    <!-- Kotak Foto: Menggunakan photo-blend agar latar putih foto jadi transparan -->
+                    <div class="absolute top-[106px] left-1/2 transform -translate-x-1/2 w-[152px] h-[196px] overflow-hidden z-10 flex items-center justify-center bg-transparent">
+                        <img id="cardPhoto" src="" alt="Foto Profil" class="w-full h-full object-cover hidden photo-blend">
                     </div>
                     
-                    <!-- Teks Nama & NIP -->
-                    <!-- Warna teks diatur menggunakan kode warna merah marun (#b31217) seperti dicontoh -->
+                    <!-- Teks Nama & NIP (Warna dirubah jadi hitam pekat 'text-black') -->
                     <div class="absolute top-[320px] w-full text-center z-10 px-2">
-                        <div id="cardNamaDepan" class="font-bold uppercase text-[18px] text-[#b31217] leading-[1.1] drop-shadow-sm truncate">NAMA ANDA</div>
-                        <div class="text-[14px] font-bold text-[#b31217] mt-1 drop-shadow-sm">NIPPPK. <span id="cardNipDepan">NIP</span></div>
+                        <div id="cardNamaDepan" class="font-extrabold uppercase text-[18px] text-black leading-[1.1] drop-shadow-sm truncate">NAMA ANDA</div>
+                        <div class="text-[14px] font-bold text-black mt-1 drop-shadow-sm">NIPPPK. <span id="cardNipDepan">NIP</span></div>
                     </div>
                 </div>
 
                 <!-- BAGIAN BELAKANG (POLOS, TANPA CORAK MERAH, TANPA HEADER) -->
                 <div class="id-card flex flex-col p-4 bg-white relative">
                     
+                    <!-- Tulisan SAMPLE tetap ada di belakang -->
                     <div class="sample-overlay z-50">SAMPLE</div>
                     
                     <!-- PEMANGGILAN LOGO DARI GITHUB SEBAGAI WATERMARK 350px -->
                     <img src="logo.png?v=1" alt="Watermark" class="watermark" onerror="this.src='https://placehold.co/350x350/ffffff/000000?text=WATERMARK'">
                     
-                    <!-- Konten Tabel Data (Ditengah secara proporsional) -->
+                    <!-- Konten Tabel Data -->
                     <div class="z-20 mt-12 text-[11px] leading-[1.4] w-full px-2">
                         <table class="w-full relative z-20">
                             <tr><td class="w-[70px] align-top py-0.5 font-semibold text-gray-800">Nama</td><td class="w-2 align-top py-0.5">:</td><td class="font-bold align-top py-0.5 text-gray-900"><span id="cardNamaBelakang"></span></td></tr>
