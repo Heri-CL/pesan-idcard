@@ -161,13 +161,11 @@
                 <div class="id-card relative bg-[url('blangko.png?v=1')] bg-cover bg-center bg-no-repeat bg-white">
                     
                     <!-- Kotak Foto Custom (Latar Kuning, List Hitam Tebal, Melengkung) -->
-                    <!-- BORDER DIUBAH: border-[4px] border-black rounded-xl -->
-                    <!-- EFEK BLEND DIHAPUS TOTAL dari tag img -->
                     <div class="absolute top-[85px] left-1/2 transform -translate-x-1/2 w-[150px] h-[190px] border-[4px] border-black rounded-xl bg-[#fcd34d] overflow-hidden z-10 flex items-center justify-center">
                         <img id="cardPhoto" src="" alt="Foto Profil" class="w-full h-full object-cover hidden">
                     </div>
                     
-                    <!-- Teks Nama & NIP (Warna dirubah jadi hitam pekat 'text-black') -->
+                    <!-- Teks Nama & NIP -->
                     <div class="absolute top-[285px] w-full text-center z-10 px-2">
                         <div id="cardNamaDepan" class="font-extrabold uppercase text-[17px] text-black leading-[1.1] drop-shadow-sm truncate">NAMA ANDA</div>
                         <div class="text-[14px] font-bold text-black mt-1 drop-shadow-sm">NIPPPK. <span id="cardNipDepan">NIP</span></div>
@@ -377,7 +375,7 @@
             fileData = { foto: { base64: "", mimeType: "", ext: "" }, bukti: { base64: "", mimeType: "", ext: "" } };
         }
 
-        // FUNGSI PENCARIAN DATA (GET KE BACKEND)
+        // FUNGSI PENCARIAN DATA (GET KE BACKEND) DENGAN ERROR DETECTOR
         async function cariDataPegawai() {
             const inputNipValue = nipInput.value.trim();
             notification.classList.add('hidden');
@@ -442,6 +440,7 @@
                     isDataFound = true;
                     tampilkanNotifikasi("NIPPPK Ditemukan di Database. Silakan lengkapi data lainnya.", "success");
                 } else {
+                    // SEKARANG AKAN MENAMPILKAN ALASAN ERROR DARI SCRIPT
                     const errorMsg = result.message ? result.message : "Data dengan NIPPPK tersebut tidak ditemukan di Master Data Anda.";
                     tampilkanNotifikasi("GAGAL: " + errorMsg, "error");
                     resetForm();
@@ -450,6 +449,7 @@
                 tampilkanNotifikasi("ERROR KONEKSI: " + error.message, "error");
                 console.error("Detail Error:", error);
             } finally {
+                // Matikan Loading
                 document.getElementById('btnCariText').classList.remove('hidden');
                 document.getElementById('btnCariLoader').classList.add('hidden');
                 btnCariNip.disabled = false;
@@ -475,22 +475,24 @@
                 cardElements.namaDepan.textContent = inputs.nama.value;
                 cardElements.namaBelakang.textContent = inputs.nama.value;
                 cardElements.jabatan.textContent = inputs.jabatan.value;
-                cardElements.unitKerja.textContent = inputs.unitKerja.value;
+                cardElements.unitKerja.textContent = inputs.unitKerja.value; // Map Unit Kerja manual ke ID Card
                 cardElements.golDarah.textContent = inputs.golDarah.value;
                 cardElements.alamat.textContent = inputs.alamat.value;
                 cardElements.foto.classList.remove('hidden');
 
-                // --- GENERATE QR CODE DINAMIS ---
-                // Format data untuk QR Code
-                const qrData = `NIPPPK: ${nipInput.value}\nNama: ${inputs.nama.value}\nJabatan: ${inputs.jabatan.value}\nUnit Kerja: ${inputs.unitKerja.value}\nAlamat Kantor: ${inputs.alamat.value}`;
+                // --- GENERATE QR CODE DINAMIS DENGAN AMAN ---
+                // 1. Siapkan teks yang mau dibungkus ke QR Code
+                const qrTextRaw = `NIPPPK: ${nipInput.value}\nNama: ${inputs.nama.value}\nJabatan: ${inputs.jabatan.value}\nUnit Kerja: ${inputs.unitKerja.value}\nAlamat Kantor: ${inputs.alamat.value}`;
                 
-                // Gunakan Google Chart API untuk generate QR Code secara instan
-                const qrUrl = `https://chart.googleapis.com/chart?cht=qr&chl=${encodeURIComponent(qrData)}&chs=200x200&choe=UTF-8&chld=L|0`;
+                // 2. Trik jitu: Encode agar spasi dan Enter dibaca komputer
+                const qrTextEncoded = encodeURIComponent(qrTextRaw);
+
+                // 3. Panggil API pembuat QR Code
+                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${qrTextEncoded}&margin=0`;
                 
-                // Tampilkan ke layar
+                // 4. Masukkan ke dalam tag Image dan tampilkan
                 document.getElementById('cardQrCode').src = qrUrl;
                 document.getElementById('qrCodeContainer').classList.remove('hidden');
-                // --------------------------------
 
                 document.getElementById('confirmationOverlay').classList.remove('hidden');
             }
@@ -528,7 +530,7 @@
             document.getElementById('confirmationOverlay').classList.remove('hidden');
         });
 
-        // FUNGSI PENGIRIMAN FINAL (POST KE BACKEND)
+        // FUNGSI PENGIRIMAN FINAL (POST KE BACKEND) DENGAN ERROR DETECTOR
         document.getElementById('btnKirimFinal').addEventListener('click', async () => {
             
             if (!buktiInput.files.length) {
@@ -540,6 +542,7 @@
             const btnLoader = document.getElementById('btnKirimLoader');
             const btnBack = document.getElementById('btnBackToPreview');
             
+            // Loading Mode
             btn.disabled = true; btnBack.disabled = true;
             btnText.textContent = "Menyimpan ke Server...";
             btnLoader.classList.remove('hidden');
@@ -573,6 +576,7 @@
                 return;
             }
 
+            // KODE ASLI POST KE GOOGLE APPS SCRIPT
             try {
                 const response = await fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
