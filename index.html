@@ -480,15 +480,29 @@
                 cardElements.alamat.textContent = inputs.alamat.value;
                 cardElements.foto.classList.remove('hidden');
 
-                // --- GENERATE QR CODE DINAMIS ---
-                // Format data untuk QR Code
-                const qrData = `NIPPPK: ${nipInput.value}\nNama: ${inputs.nama.value}\nJabatan: ${inputs.jabatan.value}\nUnit Kerja: ${inputs.unitKerja.value}\nAlamat Kantor: ${inputs.alamat.value}`;
+                // --- GENERATE QR CODE DINAMIS DENGAN KOREKSI ---
+                // Format data untuk QR Code (Gunakan backtick/template literal)
+                const qrData = `NIPPPK: ${nipInput.value}
+Nama: ${inputs.nama.value}
+Jabatan: ${inputs.jabatan.value}
+Unit Kerja: ${inputs.unitKerja.value}
+Alamat Kantor: ${inputs.alamat.value}`;
                 
-                // Gunakan Google Chart API untuk generate QR Code secara instan
-                const qrUrl = `https://chart.googleapis.com/chart?cht=qr&chl=${encodeURIComponent(qrData)}&chs=200x200&choe=UTF-8&chld=L|0`;
+                // Gunakan api.qrserver.com sebagai alternatif yang lebih stabil dari Google Chart API
+                // encodeURIComponent sangat penting agar spasi dan enter terbaca dengan benar
+                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrData)}`;
                 
                 // Tampilkan ke layar
-                document.getElementById('cardQrCode').src = qrUrl;
+                const qrImgElement = document.getElementById('cardQrCode');
+                qrImgElement.src = qrUrl;
+                
+                // Error handling jika gambar gagal dimuat
+                qrImgElement.onerror = function() {
+                    console.error("Gagal memuat QR Code. Coba gunakan API cadangan.");
+                    // Fallback ke Google Chart API jika qrserver gagal
+                    this.src = `https://chart.googleapis.com/chart?cht=qr&chl=${encodeURIComponent(qrData)}&chs=150x150&choe=UTF-8&chld=L|0`;
+                };
+
                 document.getElementById('qrCodeContainer').classList.remove('hidden');
                 // --------------------------------
 
