@@ -20,9 +20,9 @@
             overflow: hidden;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             border: 1px solid #e5e7eb;
-            font-family: Arial, sans-serif;
-            flex-shrink: 0;
-            border-radius: 12px;
+        .photo-blend {
+            /* Sedikit diturunkan contrastnya agar wajah tidak terlalu pucat */
+            mix-blend-mode: multiply; filter: contrast(1.05) brightness(1.02);
         }
 
         /* Watermark Tulisan SAMPLE */
@@ -33,12 +33,12 @@
             transform: translate(-50%, -50%) rotate(-45deg);
             font-size: 3.5rem;
             font-weight: 900;
-            color: rgba(255, 255, 255, 0.4); /* Putih transparan agar terlihat di background gelap/berwarna */
+            /* Warna Hitam Transparan diubah dari 15% jadi 8% agar lebih samar */
+            color: rgba(0, 0, 0, 0.08); 
             z-index: 50; 
             pointer-events: none; 
             letter-spacing: 0.5rem;
             user-select: none;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Sedikit shadow agar lebih jelas */
         }
 
         /* Spinner Loading */
@@ -153,37 +153,38 @@
             
             <div class="flex flex-col md:flex-row gap-6 mb-8 items-center justify-center">
                 
-                <!-- BAGIAN DEPAN (DESAIN KARTU ASN VIRTUAL) -->
+                <!-- BAGIAN DEPAN (FOTO SEBAGAI DASAR, COVER TRANSPARAN DI ATAS) -->
                 <div class="id-card relative bg-white">
-                    
                     <div class="sample-overlay">SAMPLE</div>
 
-                    <!-- LAYER DASAR: BACKGROUND KARTU (Membawa logo atas dan gradasi bawah) -->
-                    <!-- Kita letakkan gambar 'cover-depan.png' yang ada kotak catur-nya di lapisan paling bawah -->
-                    <div class="absolute inset-0 z-0 bg-[url('cover-depan.png?v=1')] bg-cover bg-center bg-no-repeat pointer-events-none"></div>
-
-                    <!-- LAYER ATAS: FOTO PROFIL DENGAN EFEK BLEND -->
-                    <!-- Menggunakan mix-blend-mode: multiply agar background catur/putih jadi transparan -->
-                    <div class="absolute inset-0 z-10 flex items-center justify-center overflow-hidden mix-blend-multiply opacity-90">
+                    <!-- FOTO PROFIL (FULL COVER / Z-0) -->
+                    <div class="absolute inset-0 z-0 bg-gray-200 flex items-center justify-center overflow-hidden">
                         <img id="cardPhoto" src="" alt="Foto Profil" class="w-full h-full object-cover hidden">
                     </div>
+
+                    <!-- GRADASI GELAP DARI BAWAH (Z-5) -->
+                    <!-- Bertujuan agar teks putih dan QR Code terbaca jelas menimpa baju/foto -->
+                    <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-[5]"></div>
+
+                    <!-- COVER DEPAN TRANSPARAN (Z-10, DI ATAS FOTO & GRADASI) -->
+                    <div class="absolute inset-0 z-10 bg-[url('cover-depan.png?v=1')] bg-cover bg-center bg-no-repeat pointer-events-none photo-blend"></div>
                     
-                    <!-- TEKS NAMA & NIP (Tetap berada di atas segalanya / Z-20) -->
+                    <!-- TEKS NAMA & NIP (Rata Kiri, Di Bawah Garis Putih) -->
                     <div class="absolute bottom-[40px] left-[20px] text-left z-20 w-[170px]">
                         <div id="cardNamaDepan" class="font-bold text-[17px] text-white leading-tight drop-shadow-md truncate">NAMA ANDA</div>
                         <div class="text-[14px] font-normal text-white mt-1 drop-shadow-md tracking-widest"><span id="cardNipDepan">NIP</span></div>
                     </div>
                     
-                    <!-- QR CODE (Kanan Bawah) -->
+                    <!-- QR CODE (Di sebelah kanan) -->
                     <div id="qrCodeContainer" class="absolute bottom-[35px] right-[20px] z-20 bg-white p-1 rounded-md shadow-md border border-gray-200 hidden">
                         <img id="cardQrCode" src="" alt="QR Code Data" class="w-[50px] h-[50px] object-contain">
                     </div>
                 </div>
 
-                <!-- BAGIAN BELAKANG (FULL COVER BACKGROUND `cover-belakang.jpg`) -->
-                <div class="id-card relative bg-[url('cover-belakang.jpg?v=1')] bg-cover bg-center bg-no-repeat">
+                <!-- BAGIAN BELAKANG (FULL COVER BACKGROUND `cover-belakang.png`) -->
+                <div class="id-card relative bg-[url('cover-belakang.png?v=1')] bg-cover bg-center bg-no-repeat">
                     <div class="sample-overlay">SAMPLE</div>
-                    <!-- Belakang polos hanya menampilkan cover-belakang.jpg tanpa teks -->
+                    <!-- Belakang polos hanya menampilkan cover-belakang.png tanpa teks -->
                 </div>
             </div>
             
