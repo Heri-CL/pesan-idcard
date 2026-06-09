@@ -123,21 +123,28 @@
             
             <div class="flex flex-col md:flex-row gap-6 mb-8 items-center justify-center">
                 
-                <!-- BAGIAN DEPAN (FOTO SEBAGAI DASAR, COVER TRANSPARAN DI ATAS) -->
+                <!-- BAGIAN DEPAN -->
                 <div class="id-card relative bg-white">
                     
-                    <div class="absolute inset-0 z-0 bg-gray-200 flex items-center justify-center overflow-hidden">
+                    <!-- 1. COVER DEPAN (PALING BAWAH / Z-0) -->
+                    <div class="absolute inset-0 z-0 bg-[url('cover-depan.png?v=1')] bg-cover bg-center bg-no-repeat pointer-events-none"></div>
+
+                    <!-- 2. FOTO PROFIL (Z-10 dengan mix-blend-multiply agar tembus pandang ke cover) -->
+                    <div class="absolute inset-0 z-10 flex items-center justify-center overflow-hidden mix-blend-multiply opacity-90">
                         <img id="cardPhoto" src="" alt="Foto Profil" class="w-full h-full object-cover hidden">
                     </div>
-
-                    <div class="absolute inset-0 z-10 bg-[url('cover-depan.png?v=1')] bg-cover bg-center bg-no-repeat pointer-events-none"></div>
                     
-                    <div class="absolute bottom-[55px] left-[30px] text-left z-20 w-[170px]">
+                    <!-- 3. GRADASI GELAP BAWAH (Z-20) agar teks terbaca -->
+                    <div class="absolute inset-x-0 bottom-0 h-1/2 z-20 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
+
+                    <!-- TEKS NAMA & NIP (Z-30) -->
+                    <div class="absolute bottom-[40px] left-[20px] text-left z-30 w-[170px]">
                         <div id="cardNamaDepan" class="font-extrabold text-[19px] text-white leading-tight drop-shadow-md truncate">NAMA ANDA</div>
                         <div class="text-[13px] font-semibold text-white mt-1 drop-shadow-md tracking-widest"><span id="cardNipDepan">NIP</span></div>
                     </div>
                     
-                    <div id="qrCodeContainer" class="absolute bottom-[48px] right-[20px] z-20 bg-white p-1 rounded-md shadow-md border border-gray-200 hidden">
+                    <!-- QR CODE (Z-30) -->
+                    <div id="qrCodeContainer" class="absolute bottom-[35px] right-[20px] z-30 bg-white p-1 rounded-md shadow-md border border-gray-200 hidden">
                         <img id="cardQrCode" src="" alt="QR Code Data" class="w-[50px] h-[50px] object-contain">
                     </div>
                 </div>
@@ -214,7 +221,14 @@
                 </svg>
             </div>
             <h2 class="text-3xl font-bold text-gray-800 mb-3">Pendaftaran Berhasil!</h2>
-            <p class="text-gray-600 mb-8 max-w-sm">Terima kasih. Data diri dan bukti pembayaran Anda telah tersimpan dengan aman ke dalam database sistem.</p>
+            <p class="text-gray-600 mb-4 max-w-sm">Terima kasih. Pesanan dan bukti pembayaran Anda telah tersimpan dengan aman ke dalam database sistem. Kami akan segera memproses Id Card Anda</p>
+            
+            <!-- NOMOR PESANAN -->
+            <p class="text-lg font-bold text-gray-800 mt-2 mb-8 bg-gray-100 py-3 px-6 rounded-lg border border-gray-200">
+                No. Pesanan Anda : <br>
+                <span id="nomorPesananDisplay" class="text-2xl text-indigo-700 tracking-widest mt-1 inline-block"></span>
+            </p>
+
             <button onclick="location.reload()" class="bg-indigo-600 hover:bg-indigo-700 text-white py-2.5 px-8 rounded-lg font-medium transition-colors">
                 Kembali ke Beranda
             </button>
@@ -225,7 +239,7 @@
         // =========================================================================
         // 1. GANTI LINK DI BAWAH INI DENGAN "URL APLIKASI WEB" DARI GOOGLE APPS SCRIPT
         // =========================================================================
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzgm_MTyHdjczLRovc55PcVM2_bXB95dwMgGPJun-SLcD-0WvnSH6HMiWwVMcqWjDlr/exec";
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxKmn-hgO3ySUSOYyGFvqmMdxyTbQoYfICeo2frkB-98ZCznFL4GpcHdw7E6upFHNEQ/exec";
 
         // --- DATABASE DEMO (Hanya aktif jika APPS_SCRIPT_URL belum diisi) ---
         const databaseDemo = [
@@ -457,6 +471,14 @@
             btnText.textContent = "Menyimpan ke Server...";
             btnLoader.classList.remove('hidden');
 
+            // 1. GENERATE NOMOR PESANAN DULU DI SINI
+            const generateOrderNumber = () => {
+                const randomNum = Math.floor(100000 + Math.random() * 900000); 
+                return 'DC-' + randomNum;
+            };
+            const nomorPesananFinal = generateOrderNumber();
+
+            // 2. MASUKKAN NOMOR PESANAN KE DALAM PAKET DATA
             const payload = {
                 nip: nipInput.value,
                 nama: inputs.nama.value,
@@ -468,12 +490,14 @@
                 fotoExt: fileData.foto.ext,
                 buktiBase64: fileData.bukti.base64,
                 buktiMimeType: fileData.bukti.mimeType,
-                buktiExt: fileData.bukti.ext
+                buktiExt: fileData.bukti.ext,
+                nomorPesanan: nomorPesananFinal // INI YANG BARU
             };
 
             // JALANKAN SIMULASI KIRIM JIKA LINK GOOGLE SCRIPT BELUM DIISI
             if(APPS_SCRIPT_URL === "ISI_DENGAN_URL_WEB_APP_ANDA_DISINI") {
                 setTimeout(() => {
+                    document.getElementById('nomorPesananDisplay').textContent = nomorPesananFinal;
                     document.getElementById('paymentOverlay').classList.add('hidden');
                     document.getElementById('successMessage').classList.remove('hidden');
                     btn.disabled = false; btnBack.disabled = false;
@@ -505,6 +529,8 @@
                 }
                 
                 if (result.status === 'success') {
+                    // TAMPILKAN NOMOR PESANAN YANG SAMA DENGAN YANG DIKIRIM KE EXCEL
+                    document.getElementById('nomorPesananDisplay').textContent = nomorPesananFinal;
                     document.getElementById('paymentOverlay').classList.add('hidden');
                     document.getElementById('successMessage').classList.remove('hidden');
                 } else {
