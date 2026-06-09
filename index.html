@@ -137,20 +137,20 @@
             
             <div class="flex flex-col md:flex-row gap-6 mb-8 items-center justify-center">
                 
-                <!-- BAGIAN DEPAN (FOTO SEBAGAI DASAR, COVER TRANSPARAN DI ATAS) -->
+                <!-- BAGIAN DEPAN (DESAIN KARTU ASN VIRTUAL) -->
                 <div class="id-card relative bg-white">
                     
-                    <!-- FOTO PROFIL (FULL COVER / Z-0) -->
-                    <!-- Dibuat rata tengah dengan flex -->
-                    <div class="absolute inset-0 z-0 bg-gray-200 flex items-center justify-center overflow-hidden">
+                    <!-- LAYER DASAR: BACKGROUND KARTU (Membawa logo atas dan gradasi bawah) -->
+                    <!-- Kita letakkan gambar 'cover-depan.png' yang ada kotak catur-nya di lapisan paling bawah -->
+                    <div class="absolute inset-0 z-0 bg-[url('cover-depan.png?v=1')] bg-cover bg-center bg-no-repeat pointer-events-none"></div>
+
+                    <!-- LAYER ATAS: FOTO PROFIL DENGAN EFEK BLEND -->
+                    <!-- Menggunakan mix-blend-mode: multiply agar background catur/putih jadi transparan -->
+                    <div class="absolute inset-0 z-10 flex items-center justify-center overflow-hidden mix-blend-multiply opacity-90">
                         <img id="cardPhoto" src="" alt="Foto Profil" class="w-full h-full object-cover hidden">
                     </div>
-
-                    <!-- COVER DEPAN TRANSPARAN (Z-10, DI ATAS FOTO) -->
-                    <!-- Memanggil gambar cover-depan.png dari GitHub -->
-                    <div class="absolute inset-0 z-10 bg-[url('cover-depan.png?v=1')] bg-cover bg-center bg-no-repeat pointer-events-none"></div>
                     
-                    <!-- TEKS NAMA & NIP (Warna Putih, Rata Kiri) -->
+                    <!-- TEKS NAMA & NIP (Tetap berada di atas segalanya / Z-20) -->
                     <div class="absolute bottom-[40px] left-[20px] text-left z-20 w-[170px]">
                         <div id="cardNamaDepan" class="font-bold text-[17px] text-white leading-tight drop-shadow-md truncate">NAMA ANDA</div>
                         <div class="text-[14px] font-normal text-white mt-1 drop-shadow-md tracking-widest"><span id="cardNipDepan">NIP</span></div>
@@ -164,7 +164,7 @@
 
                 <!-- BAGIAN BELAKANG (FULL COVER BACKGROUND `cover-belakang.png`) -->
                 <div class="id-card relative bg-[url('cover-belakang.png?v=1')] bg-cover bg-center bg-no-repeat">
-                    <!-- Sesuai instruksi: Belakang polos hanya menampilkan cover-belakang.png tanpa teks/tabel -->
+                    <!-- Belakang polos hanya menampilkan cover-belakang.png tanpa teks -->
                 </div>
             </div>
             
