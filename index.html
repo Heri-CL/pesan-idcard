@@ -25,6 +25,22 @@
             border-radius: 12px;
         }
 
+        /* Watermark Tulisan SAMPLE */
+        .sample-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.4); /* Putih transparan agar terlihat di background gelap/berwarna */
+            z-index: 50; 
+            pointer-events: none; 
+            letter-spacing: 0.5rem;
+            user-select: none;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Sedikit shadow agar lebih jelas */
+        }
+
         /* Spinner Loading */
         .loader {
             border: 3px solid #f3f3f3; border-top: 3px solid #3498db;
@@ -140,6 +156,8 @@
                 <!-- BAGIAN DEPAN (DESAIN KARTU ASN VIRTUAL) -->
                 <div class="id-card relative bg-white">
                     
+                    <div class="sample-overlay">SAMPLE</div>
+
                     <!-- LAYER DASAR: BACKGROUND KARTU (Membawa logo atas dan gradasi bawah) -->
                     <!-- Kita letakkan gambar 'cover-depan.png' yang ada kotak catur-nya di lapisan paling bawah -->
                     <div class="absolute inset-0 z-0 bg-[url('cover-depan.png?v=1')] bg-cover bg-center bg-no-repeat pointer-events-none"></div>
@@ -164,6 +182,7 @@
 
                 <!-- BAGIAN BELAKANG (FULL COVER BACKGROUND `cover-belakang.jpg`) -->
                 <div class="id-card relative bg-[url('cover-belakang.jpg?v=1')] bg-cover bg-center bg-no-repeat">
+                    <div class="sample-overlay">SAMPLE</div>
                     <!-- Belakang polos hanya menampilkan cover-belakang.jpg tanpa teks -->
                 </div>
             </div>
